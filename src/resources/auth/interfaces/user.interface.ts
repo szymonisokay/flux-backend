@@ -18,3 +18,9 @@ export interface registerModel {
 	email: string
 	password: string
 }
+
+export interface loginModel {
+	email: string
+	password: string
+	rememberMe?: boolean
+}

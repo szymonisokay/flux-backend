@@ -5,5 +5,5 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
 	const statusCode: number = res.statusCode ? res.statusCode : 500
 
 	res.status(statusCode)
-	res.json({ result: null, message: err.message } as ResponseModel)
+	res.json({ result: null, message: err.message } as ResponseModel<null>)
 }

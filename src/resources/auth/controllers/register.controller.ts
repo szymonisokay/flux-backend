@@ -4,7 +4,7 @@ import expressAsyncHandler from 'express-async-handler'
 import UserModel from '../models/user.model'
 import { User, UserWithToken, registerModel } from '../interfaces/user.interface'
 import { ErrorMessages } from '../../../shared/enums/error-messages.enum'
-import { hashPassword } from '../../../utils/hash-password'
+import { hashPassword } from '../../../utils/password-validation'
 import { createToken } from '../../../utils/token-validation'
 import { SuccessMessages } from '../../../shared/enums/success-messages.enum'
 import { ResponseModel } from '../../../shared/interfaces/response.interface'
@@ -42,5 +42,8 @@ export const register = expressAsyncHandler(async (req: Request, res: Response) 
 		token,
 	}
 
-	res.status(201).json({ result: userWithToken, message: SuccessMessages.ACCOUNT_CREATED } as ResponseModel)
+	res.status(201).json({
+		result: userWithToken,
+		message: SuccessMessages.ACCOUNT_CREATED,
+	} as ResponseModel<UserWithToken>)
 })

@@ -1,4 +1,4 @@
-export interface ResponseModel {
-	result: any
+export interface ResponseModel<T> {
+	result: T
 	message: string
 }
