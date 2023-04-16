@@ -7,6 +7,7 @@ import { validatePassword } from '../../../utils/password-validation'
 import { createToken } from '../../../utils/token-validation'
 import { ResponseModel } from '../../../shared/interfaces/response.interface'
 import { SuccessMessages } from '../../../shared/enums/success-messages.enum'
+import { serializeUser } from '../../../utils/serialize-user'
 
 export const login = expressAsyncHandler(async (req: Request, res: Response) => {
 	const { email, password, rememberMe } = req.body as loginModel
@@ -33,7 +34,7 @@ export const login = expressAsyncHandler(async (req: Request, res: Response) => 
 	const token = createToken({ id: userFromDataBase._id.toString() }, rememberMe ? '30d' : '1d')
 
 	const userWithToken: UserWithToken = {
-		user: userFromDataBase,
+		user: serializeUser(userFromDataBase),
 		token,
 	}
 

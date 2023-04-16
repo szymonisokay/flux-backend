@@ -8,6 +8,7 @@ import { hashPassword } from '../../../utils/password-validation'
 import { createToken } from '../../../utils/token-validation'
 import { SuccessMessages } from '../../../shared/enums/success-messages.enum'
 import { ResponseModel } from '../../../shared/interfaces/response.interface'
+import { serializeUser } from '../../../utils/serialize-user'
 
 export const register = expressAsyncHandler(async (req: Request, res: Response) => {
 	const { username, email, password } = req.body as registerModel
@@ -38,7 +39,7 @@ export const register = expressAsyncHandler(async (req: Request, res: Response) 
 	const token: string = createToken({ id: user._id.toString() })
 
 	const userWithToken: UserWithToken = {
-		user,
+		user: serializeUser(user),
 		token,
 	}
 
