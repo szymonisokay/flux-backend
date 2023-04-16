@@ -1,4 +1,5 @@
 export interface User {
+	id?: string
 	username: string
 	firstname?: string
 	lastname?: string
@@ -8,8 +9,10 @@ export interface User {
 	roles: string[]
 }
 
+export interface SerializedUser extends Omit<User, 'password'> {}
+
 export interface UserWithToken {
-	user: User
+	user: SerializedUser
 	token: string
 }
 
