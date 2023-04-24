@@ -3,4 +3,7 @@ export enum ErrorMessages {
 	USER_EXISTS = 'userExists',
 	USER_DOES_NOT_EXIST = 'userDoesNotExist',
 	PASSWORD_INCORRECT = 'passwordIncorrect',
+	TOKEN_NOT_PASSED = 'tokenNotPassed',
+	TOKEN_EXPIRED = 'tokenExpired',
+	NOT_AUTHORIZED = 'notAuthorized',
 }

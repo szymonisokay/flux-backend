@@ -2,9 +2,11 @@ import express, { Express, Request, json, urlencoded } from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
-import { authRouter } from './resources/auth/routers/auth.router'
-import { errorHandler } from './middlewares/error.middleware'
 import { connectToDb } from './db'
+import { errorHandler } from './middlewares/error.middleware'
+
+import { authRouter } from './resources/auth/routes/auth.router'
+import { usersRouter } from './resources/users/routes/users.router'
 
 dotenv.config()
 
@@ -16,6 +18,7 @@ app.use(json())
 app.use(urlencoded({ extended: false }))
 
 app.use('/api/auth/', authRouter)
+app.use('/api/users/', usersRouter)
 
 app.use(errorHandler)
 
