@@ -9,6 +9,7 @@ import { createToken } from '../../../utils/token-validation'
 import { SuccessMessages } from '../../../shared/enums/success-messages.enum'
 import { ResponseModel } from '../../../shared/interfaces/response.interface'
 import { serializeUser } from '../../../utils/serialize-user'
+import { generateAvatarUrl } from '../../../utils/generate-avatar'
 
 export const register = expressAsyncHandler(async (req: Request, res: Response) => {
 	const { username, email, password } = req.body as registerModel
@@ -27,11 +28,14 @@ export const register = expressAsyncHandler(async (req: Request, res: Response) 
 
 	const hashedPassword: string = await hashPassword(password)
 
+	const avatarUrl = generateAvatarUrl(email)
+
 	const newUser: User = {
 		username,
 		email,
 		password: hashedPassword,
 		roles: ['User'],
+		avatar: avatarUrl,
 	}
 
 	const user = await UserModel.create(newUser)
